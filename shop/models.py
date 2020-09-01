@@ -34,6 +34,8 @@ class Product(models.Model):
     # class Meta
     class Meta:
         ordering = ['-created']
+        verbose_name = 'category'
+        # verbose_name_plural = 'categories'
     # __str__()
     def __str__(self):
         return self.name
