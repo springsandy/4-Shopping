@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import resolve_url
 
 
-class Categroty(models.Model):
+class Category(models.Model):
     #속성
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, allow_unicode=True, unique=True)
@@ -16,14 +16,14 @@ class Categroty(models.Model):
         return self.name
     #get_absolute_url()
     def get_absolute_url(self):
-        return resolve_url('shop:product_in_dategory', self.slug)
+        return resolve_url('shop:product_in_category', self.slug)
 
 class Product(models.Model):
     #속성
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, allow_unicode=True, unique=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    category = models.ForeignKey(Categroty, on_delete=models.SET_NULL, null=True, related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='products')
     image = models.ImageField(upload_to='products/%y/%m/%d', default='products/no_image.jpg')
     stock = models.PositiveIntegerField()
     description = models.TextField(blank=True)
