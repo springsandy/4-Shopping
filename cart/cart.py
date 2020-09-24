@@ -18,7 +18,7 @@ class Cart:
         return self.cart
     
     def __len__(self):
-        return sum(item['quantity'] for item in self.values())
+        return sum(item['quantity'] for item in self.cart.values())
     
     def __iter__(self):     #for문에서 하나씩 요소를 꺼낼 떄 return 값
         products_ids = self.cart.keys()
@@ -45,6 +45,7 @@ class Cart:
             self.cart[product.id]['quantity'] += quantity
 
     def remove(self, product):       #cart에 product 삭제하자
+        product.id = str(product.id)
         if product.id in self.cart:
             del self.cart[product.id]
             self.save()
